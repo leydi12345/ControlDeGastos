@@ -13,6 +13,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
 
+use Carbon\Carbon;
+use Response;
+
 class GastovariableController extends Controller
 {
     /**
@@ -29,7 +32,17 @@ class GastovariableController extends Controller
                 ->where ('condicion','=','1')
                 ->orderBy('idgasto_variable','desc')
                 ->paginate(7);
-                return view('gasto.gastovariable.index',["variables"=>$variables,"searchText"=>$query]);
+
+
+                $variable=DB::table('gasto_variable as v')
+                ->select('v.idgasto_variable',DB::raw('sum(v.sub_total) as total'))
+                ->where ('condicion','=','1')
+                ->groupBy('v.idgasto_variable')
+                ->get();
+
+                $sum=$variables->sum('sub_total');
+
+                return view('gasto.gastovariable.index',["variables"=>$variables,"searchText"=>$query,"variable"=>$variable,"sum"=>"$sum"]);
             }
     }
 
@@ -52,6 +65,8 @@ class GastovariableController extends Controller
     public function store(GastovariableFormRequest $request)
     {
         $variable=new Gastovariable;
+        $mytime=Carbon::now('America/Caracas');
+        $variable->fecha=$mytime->toDateTimeString();
         $variable->transporte=$request->get('transporte');
         $variable->alimento=$request->get('alimento');
         $variable->vestimenta=$request->get('vestimenta');
@@ -93,7 +108,7 @@ class GastovariableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(GrastovariableFormRequest $request,$id)
+    public function update(GastovariableFormRequest $request,$id)
     {
         $variable=Gastovariable::findOrfail($id);
         $variable->transporte=$request->get('transporte');

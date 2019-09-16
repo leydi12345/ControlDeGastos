@@ -13,6 +13,7 @@ class Gatofijo extends Model
 
 
     protected $fillable =[
+    'fecha',
      'luz',
      'cable',
      'agua',

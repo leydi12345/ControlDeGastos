@@ -12,6 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
 
+use Carbon\Carbon;
+use Response;
+
 
 class GastofijoController extends Controller
 {
@@ -29,7 +32,17 @@ class GastofijoController extends Controller
                 ->where ('condicion','=','1')
                 ->orderBy('idgasto_fijo','desc')
                 ->paginate(7);
-                return view('gasto.gastofijo.index',["gastos"=>$gastos,"searchText"=>$query]);
+               
+
+                $gasto=DB::table('gasto_fijo as g')
+                ->select('g.idgasto_fijo',DB::raw('sum(g.sub_total) as total'))
+                ->where ('condicion','=','1')
+                ->groupBy('g.idgasto_fijo')
+                ->get();
+
+                $sum=$gastos->sum('sub_total');
+
+                 return view('gasto.gastofijo.index',["gastos"=>$gastos,"searchText"=>$query,"gasto"=>$gasto,"sum"=>"$sum"]);
             }
     }
 
@@ -52,6 +65,8 @@ class GastofijoController extends Controller
     public function store(GrastofijoFormRequest $request)
     {
         $gasto=new Gatofijo;
+        $mytime=Carbon::now('America/Caracas');
+        $gasto->fecha=$mytime->toDateTimeString();
         $gasto->luz=$request->get('luz');
         $gasto->cable=$request->get('cable');
         $gasto->agua=$request->get('agua');

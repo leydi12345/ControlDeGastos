@@ -13,6 +13,7 @@ class Gastovariable extends Model
 
 
     protected $fillable =[
+     'fecha',
      'transporte',
      'alimento',
      'vestimenta',

@@ -3,7 +3,7 @@
 
 <div class="row">
    <div class="col-lg-6 col-md-6 col-xs-12">
-	<h3>Nuevo Gasto Variable </h3>
+	<h3>Nuevo Gasto Variable</h3>
 	@if (count($errors)>0)
 	    <div class="alert alert-danger">
 		  <ul>
@@ -70,6 +70,16 @@
 		<div class="form-group">
 		<label for="otros">ingrese los datos de otros</label>
 		<input type="text" name="otros" required value="{{old('otros')}}" class="form-control" >
+
+		</div>
+	</div>
+
+	
+
+	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" >
+		<div class="form-group">
+		<label for="sub_total">Ingreste Total De Gasto Variable</label>
+		<input type="text" name="sub_total" required value="{{old('sub_total')}}" class="form-control" >
 
 		</div>
 	</div>

@@ -13,6 +13,7 @@ class Ingreso extends Model
 
 
     protected $fillable =[
+    'fecha',
      'ingreso_fijo',
      'ingreso_variable',
      'total',

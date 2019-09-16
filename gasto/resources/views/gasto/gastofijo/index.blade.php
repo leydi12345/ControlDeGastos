@@ -17,6 +17,7 @@
 				<thead>
 					
 					<th>Id</th>
+					<th>Fecha Registro</th>
 					<th>Luz</th>
 					<th>Cable</th>
 					<th>Agua</th>
@@ -29,6 +30,7 @@
 				@foreach ($gastos as $g)
 				<tr>
 					<td>{{ $g->idgasto_fijo}}</td>
+					<td>{{ $g->fecha}}</td>
 					<td>{{ $g->luz}}</td>
 					<td>{{ $g->cable}}</td>
 					<td>{{ $g->agua}}</td>
@@ -49,4 +51,21 @@
 			{{$gastos->render()}}
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<footer class="footer">
+	
+	<div class="container_fluid">
+		<div class="copyring ml-auto" align="right">
+			<h3 style="font-weight: 700;">TOTAL GASTO FIJO :/BS {{number_format($sum,2)}}</h3>
+		</div>	
+
+	</div>
+</footer>
+
+</div>
+</div>
+
+
 @endsection

@@ -12,6 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
 
+use Carbon\Carbon;
+use Response;
+
 
 class IngresoController extends Controller
 {
@@ -29,7 +32,16 @@ class IngresoController extends Controller
                 ->where ('condicion','=','1')
                 ->orderBy('idingreso','desc')
                 ->paginate(7);
-                return view('ingreso.ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query]);
+
+                $ingreso=DB::table('ingreso as i')
+                ->select('i.idingreso',DB::raw('sum(i.total) as total'))
+                ->where ('condicion','=','1')
+                ->groupBy('i.idingreso')
+                ->get();
+
+                $sum=$ingresos->sum('total');
+
+                return view('ingreso.ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query,"ingreso"=>$ingreso,"sum"=>"$sum"]);
             }
     }
 
@@ -52,6 +64,8 @@ class IngresoController extends Controller
     public function store(IngresoFormRequest $request)
     {
         $ingreso=new Ingreso;
+        $mytime=Carbon::now('America/Caracas');
+        $ingreso->fecha=$mytime->toDateTimeString();
         $ingreso->ingreso_fijo=$request->get('ingreso_fijo');
         $ingreso->ingreso_variable=$request->get('ingreso_variable');
         $ingreso->total=$request->get('total');
@@ -93,7 +107,7 @@ class IngresoController extends Controller
     {
         $ingreso=Ingreso::findOrfail($id);
         $ingreso->ingreso_fijo=$request->get('ingreso_fijo');
-        $ingreso->infreso_variable=$request->get('ingreso_variable');
+        $ingreso->ingreso_variable=$request->get('ingreso_variable');
         $ingreso->total=$request->get('total');
         $ingreso->update();
         return Redirect::to('ingreso/ingreso');

@@ -17,6 +17,7 @@
 				<thead>
 					
 					<th>Id</th>
+					<th>Fecha registro</th>
 					<th>Transporte</th>
 					<th>Alimento</th>
 					<th>Vestimenta</th>
@@ -29,6 +30,7 @@
 				@foreach ($variables as $v)
 				<tr>
 					<td>{{ $v->idgasto_variable}}</td>
+					<td>{{ $v->fecha}}</td>
 					<td>{{ $v->transporte}}</td>
 					<td>{{ $v->alimento}}</td>
 					<td>{{ $v->vestimenta}}</td>
@@ -48,5 +50,20 @@
 		</div>
 			{{$variables->render()}}
 	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<footer class="footer">
+	
+	<div class="container_fluid">
+		<div class="copyring ml-auto" align="right">
+			<h3 style="font-weight: 700;">TOTAL GASTO Variable :/BS {{number_format($sum,2)}}</h3>
+		</div>	
+
+	</div>
+</footer>
+
+</div>
 </div>
 @endsection
