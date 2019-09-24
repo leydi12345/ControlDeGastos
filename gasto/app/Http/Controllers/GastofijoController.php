@@ -62,21 +62,56 @@ class GastofijoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GrastofijoFormRequest $request)
+   
+
+
+    public function store (GrastofijoFormRequest $request)
     {
-        $gasto=new Gatofijo;
-        $mytime=Carbon::now('America/Caracas');
-        $gasto->fecha=$mytime->toDateTimeString();
-        $gasto->luz=$request->get('luz');
-        $gasto->cable=$request->get('cable');
-        $gasto->agua=$request->get('agua');
-        $gasto->hipoteca=$request->get('hipoteca');
-        $gasto->alquiler=$request->get('alquiler');
-        $gasto->otros=$request->get('otros');
-        $gasto->sub_total=$request->get('sub_total');
-        $gasto->condicion='1';
-        $gasto->save(); //almacena los datos en el modelo
-        return Redirect::to('gasto/gastofijo')->with('success', 'Rol Guardado');
+
+        try{
+            DB::beginTransaction();
+
+
+            $luz = $request->get('luz');
+            $cable = $request->get('cable');
+            $agua = $request->get('agua');
+            $hipoteca = $request->get('hipoteca');
+            $alquiler = $request->get('alquiler');
+            $otros = $request->get('otros');
+            $subtotal = $request->get('subtotals');
+            
+
+
+            $cont = 0;
+
+            while ($cont < count($alquiler)) {
+                $gasto = new Gatofijo();
+                $mytime = Carbon::now('America/Caracas');
+                $gasto->fecha=$mytime->toDateTimeString();
+                $gasto->luz= $luz[$cont];
+                $gasto->cable= $cable[$cont];
+                $gasto->agua= $agua[$cont];
+                $gasto->hipoteca= $hipoteca[$cont];
+                $gasto->alquiler= $alquiler[$cont];
+                $gasto->otros= $otros[$cont];
+                $gasto->sub_total= $subtotal[$cont];
+                $gasto->condicion=1;
+                $gasto->save();
+                $cont=$cont+1;
+                
+                //$cont=$cont+1;
+            }
+
+            DB::commit();
+
+        }
+        catch(Exception $e)
+        {
+            DB::rollback();
+        }
+
+        return Redirect::to('gasto/gastofijo')->with('success', 'Ingreso Guardado');
+
     }
 
     /**

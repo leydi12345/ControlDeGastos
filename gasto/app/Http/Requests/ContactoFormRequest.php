@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GrastofijoFormRequest extends FormRequest
+class ContactoFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class GrastofijoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            
- 
+            //
         ];
     }
 }

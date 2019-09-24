@@ -61,17 +61,50 @@ class IngresoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IngresoFormRequest $request)
+
+    public function store (IngresoFormRequest $request)
     {
-        $ingreso=new Ingreso;
-        $mytime=Carbon::now('America/Caracas');
-        $ingreso->fecha=$mytime->toDateTimeString();
-        $ingreso->ingreso_fijo=$request->get('ingreso_fijo');
-        $ingreso->ingreso_variable=$request->get('ingreso_variable');
-        $ingreso->total=$request->get('total');
-        $ingreso->condicion='1';
-        $ingreso->save(); //almacena los datos en el modelo
-        return Redirect::to('ingreso/ingreso')->with('success', 'Rol Guardado');
+
+        try{
+            DB::beginTransaction();
+
+
+            $nombre = $request->get('nombre');
+            $ingreso_fijo = $request->get('ingreso_fijo');
+            $ingreso_variable = $request->get('ingreso_variable');
+            $concepto = $request->get('concepto');
+            $subtotal = $request->get('subtotals');
+            
+
+
+            $cont = 0;
+
+            while ($cont < count($concepto)) {
+                $ingreso = new Ingreso();
+                $mytime = Carbon::now('America/Caracas');
+                $ingreso->fecha=$mytime->toDateTimeString();
+                $ingreso->nombre= $nombre[$cont];
+                $ingreso->concepto= $concepto[$cont];
+                $ingreso->ingreso_fijo= $ingreso_fijo[$cont];
+                $ingreso->ingreso_variable= $ingreso_variable[$cont];
+                $ingreso->total= $subtotal[$cont];
+                $ingreso->condicion=1;
+                $ingreso->save();
+                $cont=$cont+1;
+                
+                //$cont=$cont+1;
+            }
+
+            DB::commit();
+
+        }
+        catch(Exception $e)
+        {
+            DB::rollback();
+        }
+
+        return Redirect::to('ingreso/ingreso')->with('success', 'Ingreso Guardado');
+
     }
 
     /**
@@ -106,7 +139,9 @@ class IngresoController extends Controller
     public function update(IngresoFormRequest $request,$id)
     {
         $ingreso=Ingreso::findOrfail($id);
+        $ingreso->nombre=$request->get('nombre');
         $ingreso->ingreso_fijo=$request->get('ingreso_fijo');
+        $ingreso->concepto=$request->get('concepto');
         $ingreso->ingreso_variable=$request->get('ingreso_variable');
         $ingreso->total=$request->get('total');
         $ingreso->update();

@@ -20,11 +20,35 @@
 			{!!Form::model($ingreso,['method'=>'PATCH','route'=>['ingreso.update',$ingreso->idingreso]])!!}
 	{{Form::token()}}
 
+
+
+	<div class="row">
+   <div class="col-lg-12 col-md-6 col-xs-12">
+	<div class="form-group">
+		<label>Nombre Ingreso Fijo</label>
+		<input type="text" name="nombre" class="form-control" value="{{$ingreso->nombre}}" placeholder="Nombre Ingreso fijo..">
+
+	</div>
+
+  </div>
+</div>
+
 <div class="row">
    <div class="col-lg-12 col-md-6 col-xs-12">
 	<div class="form-group">
 		<label>Ingreso fijo</label>
 		<input type="text" name="ingreso_fijo" class="form-control" value="{{$ingreso->ingreso_fijo}}" placeholder="Ingreso fijo..">
+
+	</div>
+
+  </div>
+</div>
+
+<div class="row">
+   <div class="col-lg-12 col-md-6 col-xs-12">
+	<div class="form-group">
+		<label>Nombre Ingreso Variable</label>
+		<input type="text" name="concepto" class="form-control" value="{{$ingreso->concepto}}" placeholder="Nombre Ingreso fijo..">
 
 	</div>
 

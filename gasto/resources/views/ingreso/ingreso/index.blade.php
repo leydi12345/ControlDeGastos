@@ -18,7 +18,9 @@
 					
 					<th>Id</th>
 					<th>Fecha registro</th>
+					<th>Concepto Ingreso Fijo</th>
 					<th>Ingreso Fijo</th>
+					<th>Concepto Ingreso Variable</th>
 					<th>Ingreso Variable</th>
 					<th>Total</th>
 					<th>Opciones</th>
@@ -27,7 +29,9 @@
 				<tr>
 					<td>{{ $i->idingreso}}</td>
 					<td>{{ $i->fecha}}</td>
+					<td>{{ $i->nombre}}</td>
 					<td>{{ $i->ingreso_fijo}}</td>
+					<td>{{ $i->concepto}}</td>
 					<td>{{ $i->ingreso_variable}}</td>
 					<td>{{ $i->total}}</td>
 

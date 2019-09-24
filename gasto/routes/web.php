@@ -27,3 +27,6 @@ Route::resource('gasto/gastovariable','GastovariableController');
 
 Route::resource('ingreso/ingreso','IngresoController');
 
+
+Route::resource('contacto','ContactoController');
+

@@ -35,8 +35,8 @@
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">LEYDICITA9595</span>
-              <img class="img-xs rounded-circle" src="{{asset('images/faces/imagen2.jpg')}}" >
+              <span class="profile-text">HOLA, leydi !</span>
+              <img class="img-xs rounded-circle" src="{{asset('images/faces/imagen.jpg')}}" >
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -53,7 +53,7 @@
                 </div>
               </a>
               <a class="dropdown-item mt-2">
-                USUARIO
+                usuario
               </a>
             </div>
           </li>
@@ -72,12 +72,12 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="{{asset('images/faces/imagen2.jpg')}}" alt="profile image">
+                  <img src="{{asset('images/faces/imagen.jpg')}}" alt="profile image">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Leydi Morales</p>
+                  <p class="profile-name">leydicita</p>
                   <div>
-                    <small class="designation text-muted"></small>
+                    <small class="designation text-muted">n_n</small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
@@ -101,19 +101,19 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/gasto/gastofijo')}}">Gasto fijo</a>
+                  <a class="nav-link" href="{{url('/gasto/gastofijo')}}">Gastofijo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/gasto/gastovariable')}}">Gasto variable</a>
+                  <a class="nav-link" href="{{url('/gasto/gastovariable')}}">Gastovariable</a>
                 </li>
               </ul>
             </div>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{url('/contacto')}}">
               <i class="menu-icon mdi mdi-backup-restore"></i>
-              <span class="menu-title">Elementos</span>
+              <span class="menu-title">Contactos</span>
             </a>
           </li>
           <li class="nav-item">
@@ -190,7 +190,9 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="container-fluid clearfix">
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">base de datos de leydicita
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
+              <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">registro de gastos leydicita
               <i class="mdi mdi-heart text-danger"></i>
             </span>
           </div>
@@ -204,6 +206,8 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
+     <script src="{{ asset('js/jquery.min.js')}}"></script>
+     @stack('scripts')
   <script src="{{ asset('vendors/js/vendor.bundle.base.js')}}"></script>
   <script src="{{ asset('vendors/js/vendor.bundle.addons.js')}}"></script>
   <!-- endinject -->
