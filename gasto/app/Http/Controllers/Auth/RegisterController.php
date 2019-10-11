@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Rules\Captcha;
 
 class RegisterController extends Controller
 {
@@ -49,9 +50,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+           'idrol' => ['required', 'integer'],
+            'username' =>'required|string|max:255|unique:users',
+            'nombre' => ['required', 'string','max:255'],
+            'apellidos' => ['required', 'string','max:255'],
+            'ci' => ['required', 'string','max:8'],
+            'direccion' => ['required', 'string','max:100'],
+             'telefono' => ['required', 'string','max:255'],
+             'genero' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'captcha' => 'required|captcha',
         ]);
     }
 
@@ -63,10 +72,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+      return User::create([
+            'idrol' => $data['idrol'],
+            'username' => $data['username'],
+            'nombre' => $data['nombre'],
+            'apellidos' => $data['apellidos'],
+            'ci' => $data['ci'],
+            'direccion' => $data['direccion'],
+            'telefono' => $data['telefono'],
+            'genero' => $data['genero'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
         ]);
+    }
+
+    public function refreshCaptcha()
+    {
+
+        return  captcha_img();
     }
 }

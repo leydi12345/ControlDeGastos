@@ -52,9 +52,16 @@
                   </div>
                 </div>
               </a>
-              <a class="dropdown-item mt-2">
-                usuario
+
+
+              <a   class="dropdown-item mt-2">
+                usuaria
               </a>
+
+              <a  href="{{route('logout')}}" class="dropdown-item mt-2">
+                Salir
+              </a>
+             
             </div>
           </li>
         </ul>
