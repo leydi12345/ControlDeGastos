@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Socialite;
 use App\user;
 use Illuminate\Support\Facades\Auth;
-use App\Rules\Captcha;
 
-class LoginController extends Controller
+class GoogleController extends Controller
 {
-    /*
+      /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -32,26 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-
     protected $redirectTo = '/contacto';
-
-
-    public function refreshCaptcha()
-    {
-
-        return  captcha_img();
-    }
-
-     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-           
-            'captcha' => 'required|captcha',
-        ]);
-    }
-
-    
-
 
     /**
      * Create a new controller instance.
@@ -69,7 +47,7 @@ class LoginController extends Controller
 
     public function redirectToProvider(){
 
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
 
@@ -79,7 +57,7 @@ class LoginController extends Controller
 
     public function handleProviderCallback(){
 
-        $ususuarioSocilite=Socialite::driver('facebook')->user();
+        $ususuarioSocilite=Socialite::driver('google')->user();
 
         $user=User::where('ci',$ususuarioSocilite->id)->first();
 
@@ -99,7 +77,6 @@ class LoginController extends Controller
             'password'=> bcrypt('1234'),
             'ci' =>$ususuarioSocilite->id,
             'imagen' =>$ususuarioSocilite->avatar_original,
-            'direccion' =>$ususuarioSocilite->profileUrl,
             'genero' =>$ususuarioSocilite->user['id'],            
 
         ]);

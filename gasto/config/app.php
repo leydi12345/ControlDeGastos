@@ -165,6 +165,7 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */

@@ -28,4 +28,38 @@ class SocialController extends Controller
 
     	return ($user->getAvatar());
     }
+
+    public function redirect1(){
+
+    	return Socialite::driver('twitter')->redirect();
+    } 
+
+    public function callback1(){
+    	$user=Socialite::driver('twitter')->user();
+
+    	return ($user->getAvatar());
+    }
+
+    public function redirect2(){
+
+    	return Socialite::driver('Instagram')->redirect();
+    } 
+
+    public function callback2(){
+    	$user=Socialite::driver('Instagram')->user();
+
+    	return ($user->getAvatar());
+    }
+
+
+    public function redirect3(){
+
+    	return Socialite::driver('google')->redirect();
+    } 
+
+    public function callback3(){
+    	$user=Socialite::driver('google')->user();
+
+    	return ($user->getAvatar());
+    }
 }

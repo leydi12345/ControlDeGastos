@@ -37,4 +37,25 @@ return [
     'redirect' => 'http://localhost:8000/login/facebook/callback',
 ],
 
+
+'twitter' => [
+    'client_id' => env('TWITTER_CLIENT_ID'),
+    'client_secret' => env('TWITTER_CLIENT_SECRET'),
+    'redirect' => 'http://localhost:8000/login/twitter/callback1',
+],
+
+'google' => [
+    'client_id' => env('GOOGLE_CLIENT_ID'),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    'redirect' => 'http://localhost:8000/login/google/callback3',
+],
+
+
+'Instagram' => [
+    'client_id' => env('INSTAGRAM_CLIENT_ID'),
+    'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+    'redirect' => 'http://localhost:8000/login/Instagram/callback2',
+],
 ];
+
+

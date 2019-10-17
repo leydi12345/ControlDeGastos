@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Socialite;
 use App\user;
 use Illuminate\Support\Facades\Auth;
-use App\Rules\Captcha;
 
-class LoginController extends Controller
+class InstagrammController extends Controller
 {
-    /*
+   /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -32,26 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-
     protected $redirectTo = '/contacto';
-
-
-    public function refreshCaptcha()
-    {
-
-        return  captcha_img();
-    }
-
-     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-           
-            'captcha' => 'required|captcha',
-        ]);
-    }
-
-    
-
 
     /**
      * Create a new controller instance.
@@ -69,7 +47,7 @@ class LoginController extends Controller
 
     public function redirectToProvider(){
 
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('instagram')->redirect();
     }
 
 
@@ -79,13 +57,13 @@ class LoginController extends Controller
 
     public function handleProviderCallback(){
 
-        $ususuarioSocilite=Socialite::driver('facebook')->user();
+        $ususuarioSocilite=Socialite::driver('instagram')->user();
 
         $user=User::where('ci',$ususuarioSocilite->id)->first();
 
 
         if($user){
-            if(Auth::loginUsingId($user ->id)){
+            if(Auth::instagramUsingId($user ->id)){
 
                 return redirect()->route('home');
             }
@@ -106,7 +84,7 @@ class LoginController extends Controller
 
         if($usuarioregistro){
 
-            if(Auth::loginUsingId($usuarioregistro->id)){
+            if(Auth::instagramUsingId($usuarioregistro->id)){
 
                 return redirect()->route('home');
             }

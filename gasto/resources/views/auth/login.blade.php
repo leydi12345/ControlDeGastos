@@ -40,7 +40,7 @@
                         </div>
 
 
-                       <div class="form-group row">
+                   <div class="form-group row">
                             <label for="captcha" class="col-md-4 col-form-label text-md-right">{{ __('captcha') }}</label>
 
                             <div class="col-md-6">
@@ -50,15 +50,24 @@
 
                                     <!--<button type="button" class="btn btn-success btn-refresh">Refresh</button>-->
                                 </div>
-                                <input type="text" id="captcha"  class="form-control mt-2 @error('captcha') is-invalid @enderror" placeholder="Enter Captcha" name="captcha">
+                                <input id="captcha" type="captcha" class="form-control @error('captcha') is-invalid @enderror" name="captcha" required autocomplete="current-captcha">
 
                                 @error('captcha')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                
+                               <!-- <input type="text" id="captcha" class="form-control" placeholder="Enter Captcha" name="captcha">
+
+                                @if($errors->has('captcha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                @endif-->
                             </div>
                         </div>
+
 
                        <!-- <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
@@ -86,10 +95,32 @@
                             </div>
                         </div>
 
+
+                        <!-- The core Firebase JS SDK is always required and must be listed first -->
+
                      
 
-                        <a class="btn btn-link" href="redirect">
-                            facebook
+                 
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+
+                                <a class="btn btn-link" href="redirect">
+                            facebook    </a>
+
+                            <a class="btn btn-link" href="redirect3">
+                            GOOGLE  </a>
+
+                            <a class="btn btn-link" href="redirect1">
+                            twitter  </a>
+
+                            <a class="btn btn-link" href="redirect2">
+                            Instagram  </a>
+
+                            
+
+                                </div>
+                                
+                            </div>
                     </form>
                 </div>
             </div>
